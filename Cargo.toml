@@ -1,0 +1,26 @@
+[package]
+name = "md2rt"
+version = "0.1.0"
+edition = "2021"
+description = "Convert Markdown from stdin|clipboard → rich text → system clipboard."
+
+[dependencies]
+# Error handling
+anyhow = "1.0.89"
+
+# Clipboard
+arboard = "3.4.1"
+
+# Command line arguments
+clap = { version = "4.5.17", features = ["derive", "wrap_help"] }
+
+# Markdown to HTML
+markdown = "1.0.0-alpha.20"
+
+[profile.dev]
+debug = 0
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
