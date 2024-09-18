@@ -1,7 +1,9 @@
 use std::io::{stdin, IsTerminal, Read};
 
-use anyhow::{bail, Result};
+use anyhow::{anyhow, Result};
+use arboard::Clipboard;
 use clap::Parser;
+use markdown::{to_html_with_options, Options};
 
 // Just to implement `--help` and `--version` flags.
 #[derive(Parser)]
@@ -9,34 +11,29 @@ use clap::Parser;
 struct Args {}
 
 fn main() -> Result<()> {
-    let mut c = match arboard::Clipboard::new() {
-        Ok(c) => c,
-        Err(why) => bail!("failed to access system clipboard: {why}"),
-    };
-    let _ = Args::parse();
+    Args::parse();
+
+    let mut clipboard =
+        Clipboard::new().map_err(|e| anyhow!("failed to access system clipboard: {e}"))?;
 
     // If the program is run in a terminal, read from the clipboard. Otherwise, read from stdin.
-    let text = if stdin().is_terminal() {
-        match c.get_text() {
-            Ok(t) => t.trim().to_string(),
-            Err(why) => bail!("failed to get text from clipboard: {why}"),
-        }
+    let mut text = String::new();
+    if stdin().is_terminal() {
+        text = clipboard
+            .get_text()
+            .map_err(|e| anyhow!("failed to get text from clipboard: {e}"))?;
     } else {
-        let mut text = String::new();
-        match stdin().lock().read_to_string(&mut text) {
-            Ok(_) => text,
-            Err(why) => bail!("failed to read from stdin: {why}"),
-        }
-    };
+        stdin()
+            .lock()
+            .read_to_string(&mut text)
+            .map_err(|e| anyhow!("failed to read from stdin: {e}"))?;
+    }
 
-    let html = match markdown::to_html_with_options(&text, &markdown::Options::gfm()) {
-        Ok(h) => h,
-        Err(why) => bail!("failed to convert markdown to HTML: {why}"),
-    };
+    let html = to_html_with_options(&text, &Options::gfm())
+        .map_err(|e| anyhow!("failed to convert markdown to HTML: {e}"))?;
 
     println!("{text}");
-    match c.set_html(html, Some(text)) {
-        Ok(_) => Ok(()),
-        Err(why) => bail!("failed to set HTML to clipboard: {why}"),
-    }
+    clipboard
+        .set_html(html, Some(text.to_string()))
+        .map_err(|e| anyhow!("failed to set HTML to clipboard: {e}"))
 }
