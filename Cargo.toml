@@ -1,6 +1,6 @@
 [package]
 name = "md2rt"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 description = "Convert Markdown from stdin|clipboard → rich text → system clipboard."
 
@@ -9,13 +9,13 @@ description = "Convert Markdown from stdin|clipboard → rich text → system cl
 anyhow = "1.0.89"
 
 # Clipboard
-arboard = "3.4.1"
+stdin_or_clipboard = { git = "https://github.com/0x6b/stdin_or_clipboard", tag = "v0.3.0", default-features = false, features = ["sync"] }
 
 # Command line arguments
-clap = { version = "4.5.17", features = ["derive", "wrap_help"] }
+clap = { version = "4.5.18", features = ["derive", "wrap_help"] }
 
 # Markdown to HTML
-markdown = "1.0.0-alpha.20"
+markdown = "1.0.0-alpha.21"
 
 [profile.dev]
 debug = 0
