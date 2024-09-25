@@ -416,8 +416,8 @@ checksum = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
 
 [[package]]
 name = "stdin_or_clipboard"
-version = "0.3.0"
-source = "git+https://github.com/0x6b/stdin_or_clipboard?tag=v0.3.0#8f10b6e9769b9924291a673728bf640dc3eb8b41"
+version = "0.4.0"
+source = "git+https://github.com/0x6b/stdin_or_clipboard?tag=v0.4.0#c8536369045ddb1c19b332c0f821c4cfb03a2e0a"
 dependencies = [
  "arboard",
  "thiserror",
