@@ -30,5 +30,6 @@ fn main() -> Result<()> {
 
     eprintln!("Oops. Failed to access the clipboard. Dumping the HTML to stdout instead:");
     println!("{html}");
+
     Ok(())
 }
