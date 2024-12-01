@@ -6,7 +6,7 @@ use stdin_or_clipboard::sync::get_text_from_stdin_or_clipboard;
 
 fn main() -> Result<()> {
     args().skip(1).for_each(|arg| {
-        if arg.to_lowercase().contains("-v") {
+        if arg.to_lowercase().contains("-V") {
             println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
             exit(0);
         } else {
