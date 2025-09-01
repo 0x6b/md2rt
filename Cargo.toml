@@ -6,13 +6,13 @@ description = "Convert Markdown from stdin|clipboard → rich text → system cl
 
 [dependencies]
 # Error handling
-anyhow = "1.0.93"
+anyhow = "1.0.99"
 
 # Clipboard
-stdin_or_clipboard = { git = "https://github.com/0x6b/stdin_or_clipboard", tag = "v0.4.0", default-features = false, features = ["sync"] }
+stdin_or_clipboard = { git = "https://github.com/0x6b/stdin_or_clipboard", tag = "v0.6.0", default-features = false, features = ["sync"] }
 
 # Markdown to HTML
-markdown = "1.0.0-alpha.21"
+markdown = "1.0.0"
 
 [profile.dev]
 debug = 0
