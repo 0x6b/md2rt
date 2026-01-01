@@ -1,23 +1,26 @@
 use anyhow::{Result, anyhow};
-use markdown::{Options, to_html_with_options};
+use pulldown_cmark::{Options, Parser, html::push_html};
 use stdin_or_clipboard::sync::get_text_from_stdin_or_clipboard;
 
+const OPTS: Options = Options::ENABLE_TABLES
+    .union(Options::ENABLE_FOOTNOTES)
+    .union(Options::ENABLE_STRIKETHROUGH)
+    .union(Options::ENABLE_TASKLISTS);
+
 fn main() -> Result<()> {
-    let (text, clipboard) = get_text_from_stdin_or_clipboard()
-        .map_err(|e| anyhow!("failed to get text from stdin or clipboard: {e}"))?;
+    let (text, cb) =
+        get_text_from_stdin_or_clipboard().map_err(|e| anyhow!("failed to get text: {e}"))?;
 
-    let html = to_html_with_options(&text, &Options::gfm())
-        .map_err(|e| anyhow!("failed to convert markdown to HTML: {e}"))?;
+    let mut html = String::with_capacity(text.len() * 2);
+    push_html(&mut html, Parser::new_ext(&text, OPTS));
 
-    if let Some(mut clipboard) = clipboard
-        && clipboard.set_html(&html, Some(&text)).is_ok()
+    if let Some(mut c) = cb
+        && c.set_html(&html, Some(&text)).is_ok()
     {
         println!("{text}");
-        return Ok(());
+    } else {
+        eprintln!("Clipboard unavailable:");
+        println!("{html}");
     }
-
-    eprintln!("Oops. Failed to access the clipboard. Dumping the HTML to stdout instead:");
-    println!("{html}");
-
     Ok(())
 }
