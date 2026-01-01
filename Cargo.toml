@@ -11,8 +11,8 @@ anyhow = "1.0.100"
 # Clipboard
 stdin_or_clipboard = { git = "https://github.com/0x6b/stdin_or_clipboard", tag = "v0.6.0", default-features = false, features = ["sync"] }
 
-# Markdown to HTML
-markdown = "1.0.0"
+# Markdown to HTML - pulldown-cmark is ~2-5x faster than markdown crate
+pulldown-cmark = { version = "0.13", default-features = false, features = ["simd", "html"] }
 
 [profile.dev]
 debug = 0
