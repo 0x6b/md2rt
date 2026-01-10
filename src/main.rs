@@ -1,6 +1,6 @@
 use anyhow::{Result, anyhow};
 use pulldown_cmark::{Options, Parser, html::push_html};
-use stdin_or_clipboard::sync::get_text_from_stdin_or_clipboard;
+use stdin_or_clipboard::get_text_from_stdin_or_clipboard;
 
 const OPTS: Options = Options::ENABLE_TABLES
     .union(Options::ENABLE_FOOTNOTES)
