@@ -1,6 +1,6 @@
 [package]
 name = "md2rt"
-version = "0.6.3"
+version = "0.6.4"
 edition = "2024"
 description = "Convert Markdown from stdin|clipboard → rich text → system clipboard."
 
@@ -9,7 +9,7 @@ description = "Convert Markdown from stdin|clipboard → rich text → system cl
 anyhow = "1.0.100"
 
 # Clipboard
-stdin_or_clipboard = { git = "https://github.com/0x6b/stdin_or_clipboard", tag = "v0.6.0", default-features = false, features = ["sync"] }
+stdin_or_clipboard = { git = "https://github.com/0x6b/stdin_or_clipboard", tag = "v0.7.0", features = ["sync"] }
 
 # Markdown to HTML - pulldown-cmark is ~2-5x faster than markdown crate
 pulldown-cmark = { version = "0.13", default-features = false, features = ["simd", "html"] }
