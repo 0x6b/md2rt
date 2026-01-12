@@ -47,6 +47,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "clipin"
+version = "0.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c09ce330eaea879fca9424244ab1d48ae8958e9b2e634bfcaf88fb1037ad4187"
+dependencies = [
+ "arboard",
+ "thiserror",
+]
+
+[[package]]
 name = "dispatch2"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -114,8 +124,8 @@ name = "md2rt"
 version = "0.6.4"
 dependencies = [
  "anyhow",
+ "clipin",
  "pulldown-cmark",
- "stdin_or_clipboard",
 ]
 
 [[package]]
@@ -295,15 +305,6 @@ name = "smallvec"
 version = "1.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "67b1b7a3b5fe4f1376887184045fcf45c69e92af734b7aaddc05fb777b6fbd03"
-
-[[package]]
-name = "stdin_or_clipboard"
-version = "0.7.0"
-source = "git+https://github.com/0x6b/stdin_or_clipboard?tag=v0.7.0#f692075040891a8e029b7cc9badf8f30c769c8d3"
-dependencies = [
- "arboard",
- "thiserror",
-]
 
 [[package]]
 name = "syn"
