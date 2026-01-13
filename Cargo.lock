@@ -48,9 +48,9 @@ dependencies = [
 
 [[package]]
 name = "clipin"
-version = "0.8.1"
+version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c09ce330eaea879fca9424244ab1d48ae8958e9b2e634bfcaf88fb1037ad4187"
+checksum = "142307637bfbe37b6f1bbce8925d4a34b77b87197801a8b35829212c29161984"
 dependencies = [
  "arboard",
  "thiserror",
