@@ -1,6 +1,6 @@
 use anyhow::{Result, anyhow};
-use pulldown_cmark::{Options, Parser, html::push_html};
 use clipin::get;
+use pulldown_cmark::{Options, Parser, html::push_html};
 
 const OPTS: Options = Options::ENABLE_TABLES
     .union(Options::ENABLE_FOOTNOTES)
